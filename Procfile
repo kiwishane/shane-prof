@@ -1,1 +1,1 @@
-web: gunicorn app.hell:app
+web: python app.py

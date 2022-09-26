@@ -14,6 +14,7 @@ def about():
 #testing GIT
 #again testing
 
-app.run(debug=True)
+app.run(debug=True, port=80)
+
 
 

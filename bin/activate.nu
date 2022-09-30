@@ -9,7 +9,7 @@ def-env activate-virtualenv [] {
     }
 
     let is-windows = ((sys).host.name | str downcase) == 'windows'
-    let virtual-env = '/home/shaneloomb/flask'
+    let virtual-env = '/home/shaneloomb/flask-heroku'
     let bin = 'bin'
     let path-sep = ':'
     let path-name = if $is-windows {
@@ -89,4 +89,4 @@ def-env activate-virtualenv [] {
 activate-virtualenv
 
 alias pydoc = python -m pydoc
-alias deactivate = source '/home/shaneloomb/flask/bin/deactivate.nu'
+alias deactivate = source '/home/shaneloomb/flask-heroku/bin/deactivate.nu'

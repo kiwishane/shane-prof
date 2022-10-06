@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <title>Exceptions List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <title>NA Supplier platform</title>
+    
+    
+</head>
+
+<body>
+<image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+<br>
+<h2 style="text-align: center; color:blue;">Exceptions Summary</h2>
+<br>
+{% for table in tables %}
+    {{titles[loop.index]}}
+    {{ table|safe }}
+{% endfor %}
+
+<br>
+<ul>
+    <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
+</ul>
+</body>
+</html>

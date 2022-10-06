@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <title>AU Supplier platform</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+    <br>
+    <h2>AU Suppliers</h2>
+    <br>
+    <ul>
+        <li><a href="/charges">Charges summary</a></li>
+        <li><a href="/parents">Parents billing</a></li>
+        <li><a href="/add/parent">Add parent billing account</a></li>
+        <li><a href="/remove/parent">Remove parent billing account</a></li>
+        <li><a href="/exceptions">Exceptions summary</a></li>
+        <li><a href="/community">Community exclusions</a></li>
+        <li><a href="/add/community">Add community exception</a></li>
+        <li><a href="/remove/community">Remove community exception</a></li>
+        <li><a href="/orders">Orders by Supplier</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,11 @@
+supplier_id,catalog_except,store_except,rate_except,rate_except_rate,manual_except,retrofit_except,no_line_cap
+5854,n,y,n,0,n,n,n
+2782,n,y,n,0,n,n,n
+5856,n,y,n,0,n,n,n
+5855,n,y,n,0,n,n,n
+20,n,n,y,0.0075,n,n,n
+4,n,n,y,0.0075,n,n,y
+14,n,n,y,0.0075,n,n,y
+966,n,n,n,0,y,y,n
+33,n,n,y,0.0075,n,n,n
+7,n,n,y,0.0075,n,n,n

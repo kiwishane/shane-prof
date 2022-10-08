@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "layout.html" %}
+    {% block content %}
+        <div class="card">
+            <h1 class="header-text">Invoicing Module</h1>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <p>400 hours</p>
+                </div>
+                <div class="stat-item">
+                    <p>Python</p>
+                </div>
+                <div class="stat-item">
+                    <p>MySQL</p>
+                </div>
+            </div>
+            <p>This was my first project. The goal was to automate the month end invoicing process which required
+                accounts staff to download the transaction file at month end and then manipulate the data using a combination
+                of pivot tables and vLookups. This was a time consuming process, heavily reliant upob the skill set and
+                knowledge of the accounts staff around how to manipulate the data and also the unique pricing attributes of 
+                different suppliers. The possibility for human error was high although the staff had their manual processes developed
+                to an extent that errors were not common. The solution to the problem was a database using MySQL to store transaction
+                files and special pricing terms for suppliers. A program was then written in python to analyse the transaction file
+                in accordance with supplier terms.
+            </p>
+            <div class="grey-container">
+                <h3 class="sub-header">Python</h3>
+                <button class="button">Github</button>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

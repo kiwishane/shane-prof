@@ -89,3 +89,15 @@ header {
   .stat-item p {
     font-weight: bold;
   }
+  .stat-item i {
+    color: red;
+    padding: 10px;
+    background-color: #ff000020;
+    border-radius: 5px;
+  }
+  .stats-container {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: flex-start;
+  }

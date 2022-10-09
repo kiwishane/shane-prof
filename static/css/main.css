@@ -79,7 +79,7 @@ header {
     background-color: white;
     margin: 5%;
     border-radius: 5px;
-    padding: 5px 10px 5px 10px;
+    padding: 10px 15px 10px 15px;
   }
   .stat-item {
     display: flex;
@@ -100,4 +100,10 @@ header {
     gap: 1em;
     align-items: center;
     justify-content: flex-start;
+  }
+  .grey-container {
+    background-color: lightgrey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
   }

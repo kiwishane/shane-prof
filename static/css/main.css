@@ -106,4 +106,21 @@ header {
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    margin-top: 1em;
+    padding: 1em;
+  }
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .button {
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: transparent;
+  }
+  .button-hover {
+    background-color: darkgreen;
   }

@@ -6,18 +6,16 @@
 </head>
 
 <body>
-<image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
-<br>
-  <h2 style="text-align: center; color:blue;">Orders by Supplier</h2>
-<br>
-{% for table in tables %}
-    {{titles[loop.index]}}
-    {{ table|safe }}
-{% endfor %}
+    {% extends "layout.html" %}   
+    {% block content %}  
+    <h2 style="text-align: center; color:blue;">Orders by Supplier</h2>
+    <br>
+    {% for table in tables %}
+        {{titles[loop.index]}}
+        {{ table|safe }}
+    {% endfor %}
 
-<br>
-<ul>
-    <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-</ul>
+    <br>
+    {% endblock %}
 </body>
 </html>

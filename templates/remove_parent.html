@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
-  <br>
+  {% extends "layout.html" %}   
+  {% block content %}  
   <h2 style="text-align: center; color:blue;">Remove a Parent Account</h2>
     <br>
     <form action="" method = "POST">
@@ -25,8 +25,6 @@
         <a href="/" class="btn btn-primary">Cancel</a>
       </form>
     <br>
-    <ul>
-      <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-    </ul>
+  {% endblock %}
 </body>
 </html>

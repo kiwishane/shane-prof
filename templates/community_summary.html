@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+    {% extends "layout.html" %}   
+    {% block content %}  
     <br>
     <h2 style="text-align: center; color:blue;">Community Exceptions</h2>
     <br>
@@ -29,7 +30,5 @@
         </tbody>
     </table>
     <br>
-    <ul>
-        <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-    </ul>
+    {% endblock %}
 </body>

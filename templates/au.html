@@ -5,12 +5,13 @@
     <title>AU Supplier platform</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+    {% extends "layout.html" %}
+    {% block content %} 
     <br>
     <h2>AU Suppliers</h2>
     <br>
@@ -24,6 +25,7 @@
         <li><a href="/add/community">Add community exception</a></li>
         <li><a href="/remove/community">Remove community exception</a></li>
         <li><a href="/orders">Orders by Supplier</a></li>
-    </ul>
+        </ul>
+    {% endblock %}
 </body>
 </html>

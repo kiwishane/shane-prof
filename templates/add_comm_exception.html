@@ -6,43 +6,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"> -->
 </head>
 
 <body>
-    <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+    {% extends "layout.html" %}   
+    {% block content %}  
     <br>
     <h2 style="text-align: center; color:blue;">Add a community exception</h2>
     <br>
-    <h3 style="text-align: center">Enter Supplier ID</h3>
+    <h6 style="text-align: left">Enter Supplier ID</h3>
     <form action="" method = "POST">
-        <div class="form-group row" style="margin-left:400px;">
-          <label for="supplierid">Supplier Id</label>
-          <input type="text" class="form-control" name="supplierid" placeholder="e.g. 1234" id="supplierid" style="width: 200px;" value="{{ supplier }}" required>
+        <div class="form-group row" style="margin-left:5px;">
+        <label for="supplierid">Supplier Id</label>
+        <input type="text" class="form-control" name="supplierid" placeholder="e.g. 1234" id="supplierid" style="width: 200px;" value="{{ supplier }}" required>
         </div>
         <br /><br />
-    <h3 style="text-align: center">Does Manual override apply? (i.e. charge for manual orders for this supplier/community)</h3>
+    <h6 style="text-align: left">Does Manual override apply? (i.e. charge for manual orders for this supplier/community)</h3>
         <form action="" method = "POST">
-            <div class="form-group row" style="margin-left:400px;">
+            <div class="form-group row" style="margin-left:5px;">
                 <label for="manid">Manual override</label>
                 <select name="manover" placeholder="select below" required>
                 <option value ="y">Yes</option>
                 <option value ="n">No</option>
             </div>
             <br /><br />
-    <h3 style="text-align: center">Does retro override apply? (i.e. charge for retro orders for this supplier/community)</h2>
+    <h6 style="text-align: left">Does retro override apply? (i.e. charge for retro orders for this supplier/community)</h2>
         <form action="" method = "POST">
-            <div class="form-group row" style="margin-left:400px;">
+            <div class="form-group row" style="margin-left:5px;">
                 <label for="retid">Retro override</label>
                 <select name="retover" placeholder="select below" required>
                 <option value ="y">Yes</option>
                 <option value ="n">No</option>
             </div>
             <br /><br />
-        <div class="container">
-        <br />
-    <h3 style="text-align: center">Select communities to exclude for this supplier</h3>
-    <br />
-    <div class="col-md-4" style="margin-left:200px;">
+    <h6 style="text-align: left">Select communities to exclude for this supplier</h3>
+    <div class="col-md-4" style="margin-left:5px;">
         <form method="post" id="multiple_select_form">
             <select name="comms" id="comms" class="selectpicker" multiple>
                 {% for row in communities %}
@@ -70,8 +69,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <br>
-    <ul>
-        <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-    </ul>        
+    {% endblock %}         
 </body>
 </html>

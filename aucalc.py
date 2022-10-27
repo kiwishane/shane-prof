@@ -13,7 +13,6 @@ class ContextFilter(logging.Filter):
         record.sup = ContextFilter.supp
         return True
 
-# logging.basicConfig(filename='AUtransactions.log', level=logging.INFO)
 logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler('AUtransactions.log')
 file_handler.addFilter(lambda record: ContextFilter)
@@ -31,7 +30,6 @@ class my_dictionary(dict):
     def __init__(self):
         self = dict()
         
-
     def add(self, key, value):
         self[key] = value
 
@@ -47,16 +45,6 @@ newPar = my_dictionary()
 tempDict = my_dictionary()
 chargesList = []
 parents = []
-
-
-# cursor.execute("SELECT * from cThru")
-# thru = cursor.fetchall()
-# print(thru)
-# if isinstance(thru, list):
-#     print('thru is a list')
-# else:
-#     print('thru is not a list')
-#     thru = []
 
 
 cursor.execute("SELECT * FROM rateExceptions_au")
@@ -82,6 +70,7 @@ def replace_values(list_to_replace, item_to_replace, item_to_replace_with):
 
 
 def selectOrderLine(row):
+    # set variables for the active row from the database
     global active_line
     global active_supplier
     global active_supplier_type
@@ -113,10 +102,8 @@ def checkCommunityExceptions(supp,comm):
     retroOverride = 'n'
     updateRequired = 'y'
     existing = next((sub for sub in thru if sub['supplier_id'] == supp), None)
-    # print(existing)
     for dir in comm_exceptions:
-        # print(dir)
-        # determine if a community exception applies for supplier and if it does not apply for manual or retro orders
+        # determine if a community exception applies for supplier and if there is a manual or retrofit order override to account for
         if ((dir['supplier_id'] == supp) and (dir['community_id'] == comm)):
             commEx = 'y'
             updateRequired = 'n'
@@ -129,8 +116,6 @@ def checkCommunityExceptions(supp,comm):
                     retroOverride = 'y'
                     commEx = 'n'
                     updateRequired = 'y'
-        # else:
-        #     commEx = 'n'
     return[commEx,existing,manualOverride,retroOverride,updateRequired]
 
 
@@ -154,13 +139,11 @@ def checkManualRetroExceptions(su, active_product, manualOverride, retroOverride
     if order_excepts:
         logger.info(f"ACTIVE PRODUCT CODE from manualretroexcepts = {active_product_code}")
         logger.info(f"ACTIVE PRODUCT from manualretroexcept = {active_product}")
-        # logger.info('Order Excepts: ', order_excepts)
         retro = order_excepts['retrofit_except']
         manu = order_excepts['manual_except']
         quote = order_excepts['quote_except']
         product = order_excepts['product_except']
         producttext = order_excepts['product_except_text']
-        # logger.info('product text = ', producttext)
         if manu == 'y' and active_product == "MANUAL":
             zerorate_flag = 'y'
             updateRequired = 'n'
@@ -213,13 +196,10 @@ def checkExceptions(su, orderThru, comm, active_product_code, product):
     print('Exceptions are: ', order_excepts)
     if order_excepts:    #just means exceptions have been found for the supplier
         if order_excepts['catalog_except'] == 'y':
-            # print('+++++++++++++catalog exception for this supplier')
             zerorate_flag = 'y'
         elif order_excepts['store_except'] == 'y':
-            # print('OOOOOOOOOO: this supplier is an internal store')
             zerorate_flag = 'y'
         elif order_excepts['rate_except'] == 'y':
-            # print('PPPPPPPPPPPPP: Exclusive rate for this supplier is: ', order_excepts['rate_except_rate'])
             sp_rate = order_excepts['rate_except_rate']
             special_rate_flag = 'y'
             if order_excepts['line_cap_override'] == 'y':
@@ -228,7 +208,7 @@ def checkExceptions(su, orderThru, comm, active_product_code, product):
             cap_override = 'y'
             zerorate_flag = 'n'
         else:
-            print('nothinggggggggggggggg')
+            print('no exceptions')
     else:
         print('no rate exceptions')
     return [sp_rate, zerorate_flag, special_rate_flag, cap_override, updateDecision]
@@ -247,7 +227,6 @@ def calcRate(s, thr, sp_rate, specialRF, nd, zerorate_flag):
         getParentThru = next((sub for sub in parent_dict if sub['parent_id'] == parentforSupplier), None)
         if getParentThru:
             updT = getParentThru['cummul_throughput']
-            # logger.info(f"Revised total throughput from parent: {updT}")
     else:
         getCummulThru = next((subDict for subDict in nd if subDict['supplier_id'] == s), None)
         if getCummulThru:
@@ -256,12 +235,10 @@ def calcRate(s, thr, sp_rate, specialRF, nd, zerorate_flag):
         else:
             updT = thr
             logger.info(f"elseCummulThru= {updT}")
-        # logger.info(f"Revised total throughput for supplier: {updT}")
     if zerorate_flag == 'y':    #checks if zero rate applies
         line_rate = 0.0000
     elif specialRF == 'y':   #checks if a special rate exists 
-        print('SPECIAL SPECIAL SPECIAL')
-        # updT = thr
+        print('SPECIAL')
         if updT <= 2000 and parentExists == 'n':
             line_rate = 0.0000
         else:
@@ -348,16 +325,12 @@ def updateThroughput(row, updateDecision):
                 active_throughput = active_throughput
         if existing in thru:
             existing_dict = existing
-            # print('existing = ', existing_dict)
             existing_throughput = existing['cummul_throughput']
             logger.info(f"Existing throughput: {existing_throughput}")
             updated_throughput = existing_throughput + active_throughput
             logger.info(f"Updated throughput: {updated_throughput}")
             existing_dict['cummul_throughput'] = updated_throughput
-            #     print('revised through = ', existing_dict)    *********************
             new_dict = replace_values(thru, existing, existing_dict)
-            # print('updated throughput for suppliers:', new_dict)
-            # print('-----------------------------------------------------')
         else:
             updated_throughput = active_throughput
             # print('Updated throughput cummulative for supplier where no previous existing', updated_throughput)
@@ -368,13 +341,10 @@ def updateThroughput(row, updateDecision):
             cummul.value1 = updated_throughput
             cummul.add(cummul.key1,cummul.value1)
             logger.info(f"New throughput dict added: {cummul}")
-            # print(thru)
             thru.append(cummul.copy())
-            # print('*+*+*+*+*+Updated cummulated throughput=', thru)
             new_dict = thru
     else:
-        print('NO UPDATED NEEEEDEDMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOOOOOOOOOOOOOOOOOOOOOOOOOOOMMMMMMMMMMMMMMM')
-        # updated_throughput = 0
+        print('NO UPDATED NEEEEDMMMMMMMMMMMM')
     return [new_dict, updated_throughput]
 
 
@@ -386,13 +356,9 @@ def updateParentThroughput(nd):
     final_dict = nd
     for dic in nd:          # iterates through the current throughput dictionary and pulls out the dictionary for each supplier
         print(dic)
-        # tempList = []
-        # print(tempList)
-        # print('Parent database=', parents)
         supplierInDict = dic['supplier_id']     # gets the supplier_id for the current supplier being reviewed from the throughput dictionary
         throughputinDict = dic['cummul_throughput']   # gets the throughput for the current supplier from the throughput dictionary
         throughput = throughputinDict
-        # print(supplierInDict,throughputinDict)
         parentId = next((subDict for subDict in parents if subDict['supplier_id'] == supplierInDict), None)  # gets the current dictionary for the current supplier from the complete parents dictionary
         print('List containing parent ID =', parentId)
         if parentId:
@@ -409,7 +375,7 @@ def updateParentThroughput(nd):
                 tempList = []
                 index = 0
                 while index < len(parents):    
-                    print('ppppppppppppppppppppppp')
+                    print('pppppppppp')
                     print(parents[index])
                     supplierDicPar = parents[index]
                     currParent = supplierDicPar['parent_id']
@@ -435,23 +401,9 @@ def updateParentThroughput(nd):
                                 temp_Dict.append(tempDict.copy())
                                 temp_Dict1 = dict(temp_Dict)
                                 print('Gidday  ', temp_Dict1)
-                                # print('throughDict=', throughDict)
-                                # newThroughDict = throughDict
-                                # newThroughDict['cummul_throughput'] = throughput
                                 revised_final_dict = replace_values(final_dict, throughDict, temp_Dict1)
                                 final_dict = revised_final_dict
-                                # newPar.key = 'supplier_id'
-                                # newPar.value = suppForVolUpdate
-                                # newPar.add(newPar.key,newPar.value)
-                                # newPar.key1 = 'cummul_throughput'
-                                # newPar.value1 = throughput
-                                # newPar.add(newPar.key1,newPar.value1)
-                                # final_dict.update({newPar.copy()})
                                 print('updated final_dict:', final_dict)
-                                # throughDi = next((subD for subD in nd if subD['supplier_id'] == inL), None)
-                                # throughDi['cummul_throughput'] = origThrough
-                                # print('Dic is still:', dic)
-                                # print('final_dict is still:', throughDict)
                     index += 1
                     
             else:
@@ -466,7 +418,6 @@ def updateParentThroughput(nd):
                 tempList = []
                 index = 0
                 while index < len(parents):    
-                    print('ppppppppppppppppppppppp')
                     print(parents[index])
                     supplierDicPar = parents[index]
                     currParent = supplierDicPar['parent_id']
@@ -499,13 +450,12 @@ def updateParentThroughput(nd):
 
         else:
             print('>>>>>No parent supplier for this supplier')
-        # print('Final Throughput AFTER Parent billing review:', nd)
-        # print('Parent throughput = ', parent_dict)
         print('----------------------------')
     return[parent_dict, new_dict, final_dict]
 
 
 def pullRows():
+    #this function initiate a number of sub functions to check exceptions and calculate charges
     row = cursor.fetchone()
     while row is not None:
         selectOrderLine(row)
@@ -518,9 +468,9 @@ def pullRows():
             logger.info(f"Line_charge is: {line_charge}")
             cummulativeCharge(active_supplier, line_charge, zerorate_flag)
             print('------------------------------------------------------------------------------LINE ENDED\n')
-            # print('cummalative charges are:', chargesList)
         row = cursor.fetchone()
     
+# this is the main executable part of the program which selects each row fromt eh orders table then runs the pullRows() function
 cursor.execute("SELECT * FROM orders_au")
 row = cursor.fetchone()
 while row is not None:

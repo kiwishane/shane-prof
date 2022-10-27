@@ -5,31 +5,28 @@
     <title>Add Parent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
 </head>
 
 <body>
-  <div>
-    <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+  {% extends "layout.html" %}   
+  {% block content %}  
+  <br>
+  <h2 style="text-align: center; color:blue;">Add a Parent Account</h2>
     <br>
-    <h2 style="text-align: center; color:blue;">Add a Parent Account</h2>
-      <br>
-      <form action="" method = "POST">
-          <div class="form-group row">
-            <label for="supplierid">Enter Supplier Id</label>
-            <input type="text" class="form-control" name="supplierid" placeholder="e.g. 1234" id="supplierid" value="{{ supplier }}" required>
-          </div>
-          <div class="form-group row">
-              <label for="parentid">Enter Parent Id</label>
-              <input type="text" class="form-control" name="parentid" placeholder="e.g. 1234" id="parentid" value="{{ parent }}" required>
-          </div>
-          <button type="btnAdd" class="btn btn-primary">Submit</button>
-          <a href="/" class="btn btn-primary">Cancel</a>
-        </form>
-      <br>
-      <ul>
-        <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-      </ul>
-  </div>
+    <form action="" method = "POST">
+        <div class="form-group row">
+          <label for="supplierid">Enter Supplier Id</label>
+          <input type="text" class="form-control" name="supplierid" placeholder="e.g. 1234" id="supplierid" value="{{ supplier }}" required>
+        </div>
+        <div class="form-group row">
+            <label for="parentid">Enter Parent Id</label>
+            <input type="text" class="form-control" name="parentid" placeholder="e.g. 1234" id="parentid" value="{{ parent }}" required>
+        </div>
+        <button type="btnAdd" class="btn btn-primary">Submit</button>
+        <a href="/" class="btn btn-primary">Cancel</a>
+      </form>
+    <br>
+  {% endblock %}
 </body>
 </html>

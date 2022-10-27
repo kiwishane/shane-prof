@@ -8,22 +8,21 @@
 </head>
 
 <body>
-<image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
-<br>
-  <h2 style="text-align: center; color:blue;">Billing Summary</h2>
-  <br>
-{% for table in tables %}
-    {{titles[loop.index]}}
-    {{ table|safe }}
-{% endfor %}
-<br>
-<h4> Total Billable Throughput: {{ totThroughput }}</h4>
-<h4> Total Fees: {{ totFees }}</h4>
-<h4> Average : {{ fees_percent }}</h4> 
-<h4> Total Min Fees: {{ totMinFees }}</h4>
-<br>
-<ul>
-    <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-</ul>
+    {% extends "layout.html" %}
+    {% block content %} 
+    <br>
+    <h2 style="text-align: center; color:blue;">Billing Summary</h2>
+    <br>
+    {% for table in tables %}
+        {{titles[loop.index]}}
+        {{ table|safe }}
+    {% endfor %}
+    <br>
+    <h4> Total Billable Throughput: {{ totThroughput }}</h4>
+    <h4> Total Fees: {{ totFees }}</h4>
+    <h4> Average : {{ fees_percent }}</h4> 
+    <h4> Total Min Fees: {{ totMinFees }}</h4>
+    <br>
+    {% endblock %}
 </body>
 </html>

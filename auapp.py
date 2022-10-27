@@ -227,4 +227,4 @@ def orders_supplier():
     return render_template("supplier_orders.html", labels=labels, values=values, tables=[dfsuppOrders.to_html(classes='data')], titles=dfsuppOrders.columns.values)
 
 if(__name__ == "__main__"):
-    supplier.run(debug=False, host = "127.0.0.1", port=4000)
+    supplier.run(debug=False, host = "127.0.0.1", port=4500)

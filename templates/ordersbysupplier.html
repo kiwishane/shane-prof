@@ -3,82 +3,27 @@
 
 <head>
     <title>Orders by Supplier</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
 </head>
 
-<body id="bootstrap-overrides">
-  <image src="{{ url_for('static', filename='images/um.jpeg') }}"></image>
+<body>
+  {% extends "layout.html" %}   
+  {% block content %}  
   <br>
-  <br>
-  
   <h2 style="text-align: center; color:blue;">Orders by Supplier</h2>
-    <br>
-    <form action="" method = "POST">
-        <div class="form-group row">
-          <label for="supplierid">Supplier Id</label>
-          <input type="text" name="supplierid" id="supplierid" size="15">
-        </div>
-        <br>
-        <button type="btnAdd" class="btn btn-primary">Submit</button>
-        <a href="/" class="btn btn-primary">Cancel</a>
-      </form>
   <br>
-  <div>
-    <canvas id="myChart" max-width="100" max-height="100"></canvas>
-  </div>
-  <script>
-    const labels = labels;
-
-    const data = {
-      labels: {{ labels | safe }},
-      datasets: [{
-        label: 'First dataset',
-        backgroundColor: 'rgb(255, 99 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: {{ values | safe }},
-      }]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
-  </script>
-
-  <script>
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
-  </script>
-  <!-- <script>
-    var ctx = document.getElementById("lineChart").getContext("2d");
-    var lineChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: {{ labels | safe }},
-        datasets: [
-          {
-            label: "Data points",
-            data: {{ values | safe }},
-            fill: false,
-            borderColor: "rgb(75, 192, 192)",
-            lineTension: 0.1
-          }
-        ]
-      },
-      options: {
-        responsive: false
-      }
-    });
-  </script> -->
-
-  <ul>
-    <li><a href="{{ url_for('main') }}"> Click here to return to Home</a></li>
-  </ul>
+  <div class="ct-chart ct-perfect-fourth"></div>
+  <form action="" method = "POST">
+    <div class="form-group row">
+      <label for="supplierid">Supplier Id</label>
+      <input type="text" name="supplierid" id="supplierid" size="15">
+    </div>
+    <br>
+    <button type="btnAdd" class="btn btn-primary">Submit</button>
+    <a href="/" class="btn btn-primary">Cancel</a>
+  </form>
+  {% endblock %}
 </body>
 </html>
